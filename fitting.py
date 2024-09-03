@@ -55,7 +55,7 @@ def get_config():
     cmd_parameters.append(["sub", 0, int])
     cmd_parameters.append(["run", 0, int])
     cmd_parameters.append(["seed", 0, int])
-    cmd_parameters.append(["num_epochs", 2, int])
+    cmd_parameters.append(["num_epochs", 150, int])
     cmd_parameters.append(["filename", "test", str])
     cmd_parameters.append(["jr_A_default", 3.25, float])
     cmd_parameters.append(["jr_A_std", 0, float])

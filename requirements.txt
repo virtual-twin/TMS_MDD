@@ -1,0 +1,4 @@
+numpy
+scipy
+matplotlib
+tvb-library==2.7.1
