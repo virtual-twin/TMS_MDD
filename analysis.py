@@ -183,7 +183,7 @@ print(f"Number of outliers: {run_count}")
 
 
 
-### Method Plots
+### METHOD PLOTS
 
 ticks = [50, 100, 150, 200]
 sub_choice = 14
@@ -286,7 +286,7 @@ plt.close()
 
 
 
-### Results Plots
+### RESULTS PLOTS
 
 fig, ax = plt.subplots(2, 1, figsize=(fig_width-2,10), dpi=resolution)
 
