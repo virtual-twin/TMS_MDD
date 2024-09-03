@@ -20,26 +20,26 @@ This repository contains the code and data necessary to reproduce the results pr
 
 ## 1. Project Structure
 
-- **data/**: Contains files necessary to run the code
-  - **leadfield/**: Leadfield matrix to project from source- to sensor-level (EEG)
-  - **Schaefer2018_200Parcels_7Networks_count.csv**: Unfitted structural connectivity weights matrix
-  - **Schaefer2018_200Parcels_7Networks_distance.csv**: Structural connectivity tract length matrix
-  - **stimulus_weights.npy**: Spatial information of TMS stimulus
-  - **TEPs.mat**: Empirical TMS-EEG timeseries for 20 healthy subjects, needs to be downloaded separately
-  - **tess_Schaefer2018_200_7net.mat**: Surface information on structural connectivity
-- **analysis.py**: Script 3 for generating plots and analyzing simulation results
-- **create_parameters.py**: Creates `parameters.txt`
-- **environment.yml**: Generates environment with necessary software
-- **fitting.py**: Script 1 for fitting EEG timeseries to empirical data
-- **functions.py**: Contains shared functions used across other scripts
-- **parameters.txt**: Specifies parameters for both `fitting.py` and `simulation.py`for parallel computing
-- **requirements.txt**: Installs further necessary software
-- **simulation.py**: Script 2 for running simulations based on fitted data
+- `data/`: Contains files necessary to run the code
+  - `leadfield/`: Leadfield matrix to project from source- to sensor-level (EEG)
+  - `Schaefer2018_200Parcels_7Networks_count.csv`: Unfitted structural connectivity weights matrix
+  - `Schaefer2018_200Parcels_7Networks_distance.csv`: Structural connectivity tract length matrix
+  - `stimulus_weights.npy`: Spatial information of TMS stimulus
+  - `TEPs.mat`: Empirical TMS-EEG timeseries for 20 healthy subjects, needs to be downloaded separately
+  - `tess_Schaefer2018_200_7net.mat`: Surface information on structural connectivity
+- `analysis.py`: Script 3 for generating plots and analyzing simulation results
+- `create_parameters.py`: Creates `parameters.txt`
+- `environment.yml`: Generates environment with necessary software
+- `fitting.py`: Script 1 for fitting EEG timeseries to empirical data
+- `functions.py`: Contains shared functions used across other scripts
+- `parameters.txt`: Specifies parameters for both `fitting.py` and `simulation.py`for parallel computing
+- `requirements.txt`: Installs further necessary software
+- `simulation.py`: Script 2 for running simulations based on fitted data
 
 
 ## 2. Data
 
-All data necessary to run this code and reproduce the results, except the empirical TMS-EEG data, is stored in the `data/` directory. To run the fitting on the empirical TMS-EEG data, download the dataset under the link below and place `TEPs.mat` in `data/`. Please observe the data protection regulations of your respective country.
+All data necessary to run this code and reproduce the results, except the empirical TMS-EEG data, is stored in the `data/` directory. To run the fitting on the empirical TMS-EEG data, download the dataset under the link below and place `TEPs.mat` in `data/`. Please observe the data protection regulations of your respective country. All other data stored in `data/` originates from the publication listed below.
 
 **Empirical TMS-EEG Data**<br>
 Biabani M, Fornito A, Mutanen TP, Morrow J, Rogasch NC, Characterizing and minimizing the contribution of sensory inputs to TMS-evoked potentials. Brain Stimulation, 12(6), 1537-1552, 2019, DOI: https://doi.org/https://doi.org/10.1016/j.brs.2019.07.009<br>
@@ -88,6 +88,7 @@ For questions or comments, please contact:
 
 ## 7. Acknowledgments
 
-The fitting method and all functions in this script 'functions.py' except from 'gmfa' and  'gmfa_timepoint' are based on the code provided with the following publication: 
+The fitting method and all functions in this script 'functions.py' except from 'gmfa' and  'gmfa_timepoint' are based on the code provided with the following publication:
+
 Momi D, Wang Z, Griffiths JD. 2023. TMS-EEG evoked responses are driven by recurrent large-scale network dynamics. eLife2023;12:e83232 DOI: https://doi.org/10.7554/eLife.83232 
 Licensed under a Creative Commons Attributionlicense (CC-BY). The original code can be found at: https://github.com/GriffithsLab/PyTepFit/blob/main/tepfit/fit.py
