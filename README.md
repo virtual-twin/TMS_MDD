@@ -26,7 +26,6 @@ This repository contains the code and data necessary to reproduce the results pr
   - `Schaefer2018_200Parcels_7Networks_distance.csv`: Structural connectivity tract length matrix
   - `stimulus_weights.npy`: Spatial information of TMS stimulus
   - `TEPs.mat`: Empirical TMS-EEG timeseries for 20 healthy subjects, needs to be downloaded separately
-  - `tess_Schaefer2018_200_7net.mat`: Surface information on structural connectivity
 - `analysis.py`: Script 3 for generating plots and analyzing simulation results
 - `create_parameters.py`: Creates `parameters.txt`
 - `environment.yml`: Generates environment with necessary software
