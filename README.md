@@ -20,20 +20,20 @@ This repository contains the code and data necessary to reproduce the results pr
 
 ## 1. Project Structure
 
+- `1_fitting.py`: Script 1 for fitting EEG timeseries to empirical data
+- `2_simulation.py`: Script 2 for running simulations based on fitted data
+- `3_analysis.py`: Script 3 for generating plots and analyzing simulation results
 - `data/`: Contains files necessary to run the code
   - `leadfield/`: Leadfield matrix to project from source- to sensor-level (EEG)
   - `Schaefer2018_200Parcels_7Networks_count.csv`: Unfitted structural connectivity weights matrix
   - `Schaefer2018_200Parcels_7Networks_distance.csv`: Structural connectivity tract length matrix
   - `stimulus_weights.npy`: Spatial information of TMS stimulus
   - `TEPs.mat`: Empirical TMS-EEG timeseries for 20 healthy subjects, needs to be downloaded separately
-- `analysis.py`: Script 3 for generating plots and analyzing simulation results
 - `create_parameters.py`: Creates `parameters.txt`
 - `environment.yml`: Generates environment with necessary software
-- `fitting.py`: Script 1 for fitting EEG timeseries to empirical data
 - `functions.py`: Contains shared functions used across other scripts
-- `parameters.txt`: Specifies parameters for both `fitting.py` and `simulation.py`for parallel computing
+- `parameters.txt`: Specifies parameters for both `1_fitting.py` and `2_simulation.py`for parallel computing
 - `requirements.txt`: Installs further necessary software
-- `simulation.py`: Script 2 for running simulations based on fitted data
 
 
 ## 2. Data
@@ -65,11 +65,11 @@ pip install -r requirements.txt
 ## 4. Usage
 
 The recreation of the publication results requires three steps, which must be performed in order:
-1. Fitting: The script `fitting.py` fits EEG timeseries of whole-brain simulations to empirical TMS-evoked potential EEG timeseries. A gradient-descent algorithm is applied to fit the structural connectivity weights individually. The fitting is repeated for 20 healthy subjects and 100 different initial conditions each, which generates 2,000 individual fittings.
-2. Simulation: In the script `simulation.py`, the fittings from step 1 are used to generate whole-brain simulations. The simulations are repeated with one of two parameters (Jansen & Rit neural mass model parameter b or C4) altered in a range of -50% to +50% from default in 2% steps, resulting in 50 simulations per parameter, adding up to one default simulation, generating 101 simulations per fitting. Results for all simulations are stored. 
-3. Analysis: The script `analysis.py` takes the source- (RAW) and sensor-level (EEG) timeseries to generate plots.
+1. Fitting: The script `1_fitting.py` fits EEG timeseries of whole-brain simulations to empirical TMS-evoked potential EEG timeseries. A gradient-descent algorithm is applied to fit the structural connectivity weights individually. The fitting is repeated for 20 healthy subjects and 100 different initial conditions each, which generates 2,000 individual fittings.
+2. Simulation: In the script `2_simulation.py`, the fittings from step 1 are used to generate whole-brain simulations. The simulations are repeated with one of two parameters (Jansen & Rit neural mass model parameter b or C4) altered in a range of -50% to +50% from default in 2% steps, resulting in 50 simulations per parameter, adding up to one default simulation, generating 101 simulations per fitting. Results for all simulations are stored. 
+3. Analysis: The script `3_analysis.py` takes the source- (RAW) and sensor-level (EEG) timeseries to generate plots.
 
-To create the results, the scripts were executed on a high-performance computing cluster utilizing parallelization techniques with the argparse package. Both `fitting.py` and `simulation.py` were run with the parameters specified in each line of parameters.txt, leveraging multiple cores for computation.
+To create the results, the scripts were executed on a high-performance computing cluster utilizing parallelization techniques with the argparse package. Both `1_fitting.py` and `2_simulation.py` were run with the parameters specified in each line of parameters.txt, leveraging multiple cores for computation.
 
 
 ## 5. License
@@ -81,7 +81,7 @@ This project is licensed under the Creative Commons Attribution 4.0 Internationa
 
 For questions or comments, please contact:
 - Timo Hofsähs: timo.hofsaehs@charite.de
-- Jil Meier: jil.meier@bih-charite.de
+- Jil Meier: jil-mona.meier@bih-charite.de
 - Petra Ritter: petra.ritter@bih-charite.de
 
 

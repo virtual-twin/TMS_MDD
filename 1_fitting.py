@@ -1,5 +1,5 @@
 # ------------------------------------------------------------------------------
-# fitting.py
+# 1_fitting.py
 # Author: Dr. Timo Hofsähs
 #
 # Description: 
@@ -24,11 +24,12 @@
 # License: This code is licensed under the Creative Commons Attribution 4.0 International 
 # License (CC-BY 4.0), which allows for redistribution, adaptation, and use in source 
 # and binary forms, with or without modification, provided proper credit is given to 
-# the original authors. You can view the full terms of this license at:
-# https://creativecommons.org/licenses/by/4.0/
+# the original authors (cite as indicated above). You can view the full terms of this 
+# license at: https://creativecommons.org/licenses/by/4.0/
 # ------------------------------------------------------------------------------
 
 import argparse
+import gdown
 import numpy as np
 import os
 import pandas as pd
@@ -40,10 +41,28 @@ import zipfile
 from functions import ParamsJR, Model_fitting, RNNJANSEN, Costs, OutputNM
 
 
+if not os.path.exists('./data'):
+    os.makedirs('./data')
+    data_url = 'https://drive.google.com/drive/folders/1iwsxrmu_rnDCvKNYDwTskkCNt709MPuF'
+    data_files = {'leadfield': '1wyft6xCjfi_ebbwGrCUaiAc7IY7A3xbf', 
+                'stim_weights.npy': '1XNlaE_fN1JtD0fACD--UgwXmrTQtfT4Y', 
+                'Schaefer2018_200Parcels_7Networks_count.csv': '1OXMED1vIed3cC_kWtcz3XjkyR9b0Gux7', 
+                'Schaefer2018_200Parcels_7Networks_distance.csv': '1qXf618GW1W0p8iy9SjZClvD8UZ934czE'}
+    for filename, file_id in data_files.items():
+        gdown.download(f'https://drive.google.com/uc?id={file_id}', f'./data/{filename}', quiet=True)
+
 def get_config():
-    '''
-    defines all values that can be changed from outside the script
-    '''
+    """
+    Defines and parses command-line arguments for the script.
+
+    This function sets up an argument parser with various parameters that can be 
+    configured from the command line. It includes parameters for different 
+    configurations such as 'sub', 'run', 'seed', 'num_epochs', and various 
+    'jr_*' parameters with their default values and types.
+
+    Returns:
+        argparse.Namespace: An object containing the parsed command-line arguments.
+    """
     print('get_config')
     
     parser = argparse.ArgumentParser()

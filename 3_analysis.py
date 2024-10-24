@@ -1,5 +1,5 @@
 # ------------------------------------------------------------------------------
-# analysis.py
+# 3_analysis.py
 # Author: Dr. Timo Hofsähs
 #
 # Description: 
@@ -17,8 +17,8 @@
 # License: This code is licensed under the Creative Commons Attribution 4.0 International 
 # License (CC-BY 4.0), which allows for redistribution, adaptation, and use in source 
 # and binary forms, with or without modification, provided proper credit is given to 
-# the original authors. You can view the full terms of this license at:
-# https://creativecommons.org/licenses/by/4.0/
+# the original authors (cite as indicated above). You can view the full terms of this 
+# license at: https://creativecommons.org/licenses/by/4.0/
 # ------------------------------------------------------------------------------
 
 
