@@ -40,15 +40,13 @@ import zipfile
 
 from functions import ParamsJR, Model_fitting, RNNJANSEN, Costs, OutputNM
 
-
-if not os.path.exists('./data'):
-    os.makedirs('./data')
-    data_url = 'https://drive.google.com/drive/folders/1iwsxrmu_rnDCvKNYDwTskkCNt709MPuF'
-    data_files = {'leadfield': '1wyft6xCjfi_ebbwGrCUaiAc7IY7A3xbf', 
-                'stim_weights.npy': '1XNlaE_fN1JtD0fACD--UgwXmrTQtfT4Y', 
-                'Schaefer2018_200Parcels_7Networks_count.csv': '1OXMED1vIed3cC_kWtcz3XjkyR9b0Gux7', 
-                'Schaefer2018_200Parcels_7Networks_distance.csv': '1qXf618GW1W0p8iy9SjZClvD8UZ934czE'}
-    for filename, file_id in data_files.items():
+data_url = 'https://drive.google.com/drive/folders/1iwsxrmu_rnDCvKNYDwTskkCNt709MPuF'
+data_files = {'leadfield': '1wyft6xCjfi_ebbwGrCUaiAc7IY7A3xbf', 
+            'stim_weights.npy': '1XNlaE_fN1JtD0fACD--UgwXmrTQtfT4Y', 
+            'Schaefer2018_200Parcels_7Networks_count.csv': '1OXMED1vIed3cC_kWtcz3XjkyR9b0Gux7', 
+            'Schaefer2018_200Parcels_7Networks_distance.csv': '1qXf618GW1W0p8iy9SjZClvD8UZ934czE'}
+for filename, file_id in data_files.items():
+    if not os.path.exists(f'./data/{filename}'):
         gdown.download(f'https://drive.google.com/uc?id={file_id}', f'./data/{filename}', quiet=True)
 
 def get_config():

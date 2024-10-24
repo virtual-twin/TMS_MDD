@@ -23,7 +23,7 @@ This repository contains the code and data necessary to reproduce the results pr
 - `1_fitting.py`: Script 1 for fitting EEG timeseries to empirical data
 - `2_simulation.py`: Script 2 for running simulations based on fitted data
 - `3_analysis.py`: Script 3 for generating plots and analyzing simulation results
-- `data/`: Contains files necessary to run the code
+- `data/`: Will be created when running `1_fitting.py`, contains all required files to run scripts 
   - `leadfield/`: Leadfield matrix to project from source- to sensor-level (EEG)
   - `Schaefer2018_200Parcels_7Networks_count.csv`: Unfitted structural connectivity weights matrix
   - `Schaefer2018_200Parcels_7Networks_distance.csv`: Structural connectivity tract length matrix
@@ -38,7 +38,7 @@ This repository contains the code and data necessary to reproduce the results pr
 
 ## 2. Data
 
-All data necessary to run this code and reproduce the results, except the empirical TMS-EEG data, is stored in the `data/` directory. To run the fitting on the empirical TMS-EEG data, download the dataset under the link below and place `TEPs.mat` in `data/`. Please observe the data protection regulations of your respective country. All other data stored in `data/` originates from the publication listed below.
+Data necessary to run the code and reproduce the results need to be downloaded and stored in the `data/` directory. To run the fitting on the empirical TMS-EEG data, download the dataset under the link below and place the file `TEPs.mat` in `data/`. Please observe the data protection regulations of your respective country. All other data will be downloaded automatically when running `1_fitting.py` from the repository provided.
 
 **Empirical TMS-EEG Data**<br>
 Biabani M, Fornito A, Mutanen TP, Morrow J, Rogasch NC, Characterizing and minimizing the contribution of sensory inputs to TMS-evoked potentials. Brain Stimulation, 12(6), 1537-1552, 2019, DOI: https://doi.org/https://doi.org/10.1016/j.brs.2019.07.009<br>
