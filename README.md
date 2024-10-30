@@ -23,6 +23,7 @@ This repository contains the code and data necessary to reproduce the results pr
 - `1_fitting.py`: Script 1 for fitting EEG timeseries to empirical data
 - `2_simulation.py`: Script 2 for running simulations based on fitted data
 - `3_analysis.py`: Script 3 for generating plots and analyzing simulation results
+- `4_bids_conversion.py`: Script 4 for converting the generated results into BIDS standard
 - `data/`: Will be created when running `1_fitting.py`, contains all required files to run scripts 
   - `leadfield/`: Leadfield matrix to project from source- to sensor-level (EEG)
   - `Schaefer2018_200Parcels_7Networks_count.csv`: Unfitted structural connectivity weights matrix
@@ -68,6 +69,7 @@ The recreation of the publication results requires three steps, which must be pe
 1. Fitting: The script `1_fitting.py` fits EEG timeseries of whole-brain simulations to empirical TMS-evoked potential EEG timeseries. A gradient-descent algorithm is applied to fit the structural connectivity weights individually. The fitting is repeated for 20 healthy subjects and 100 different initial conditions each, which generates 2,000 individual fittings.
 2. Simulation: In the script `2_simulation.py`, the fittings from step 1 are used to generate whole-brain simulations. The simulations are repeated with one of two parameters (Jansen & Rit neural mass model parameter b or C4) altered in a range of -50% to +50% from default in 2% steps, resulting in 50 simulations per parameter, adding up to one default simulation, generating 101 simulations per fitting. Results for all simulations are stored. 
 3. Analysis: The script `3_analysis.py` takes the source- (RAW) and sensor-level (EEG) timeseries to generate plots.
+4. BIDS Conversion: The script `4_bids_conversion.py` takes the complete directory structure consisting of downloaded data files and results from `1_fitting.py` and `2_simulation.py` and creates a complete new directory into Brain Imaging Data Standard (BIDS). The structure follows the BIDS Extension Proposal 034 (BEP034) for Computational Model Specifications (https://zenodo.org/records/7962032). Please note, that the script requires additional software packages (MNE, gdown, requests) and performs further file downloads.
 
 To create the results, the scripts were executed on a high-performance computing cluster utilizing parallelization techniques with the argparse package. Both `1_fitting.py` and `2_simulation.py` were run with the parameters specified in each line of parameters.txt, leveraging multiple cores for computation.
 
