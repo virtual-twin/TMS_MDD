@@ -3,3 +3,4 @@ scipy
 matplotlib
 tvb-library==2.7.1
 gdown
+mne

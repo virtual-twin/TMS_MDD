@@ -4,7 +4,7 @@
 This repository contains the code and data necessary to reproduce the results presented in the paper:
 
 
-### The Virtual Brain links transcranial magnetic stimulation evoked potentials and neurotransmitter changes in major depressive disorder
+### The Virtual Brain links transcranial magnetic stimulation evoked potentials and inhibitory neurotransmitter changes in major depressive disorder
 #### Timo Hofsähs, Marius Pille, Jil Meier, Petra Ritter  
 (in prep)
 

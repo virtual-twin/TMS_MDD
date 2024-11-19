@@ -221,7 +221,7 @@ def run_simulation(config):
 
      # STIMULUS 
      stim_scaling = config.stim_scaling * dict_sub['A'] * dict_sub['a'] / 1000
-     stimulus_weighting_file = np.load('./data/stimulus_weights.npy')
+     stimulus_weighting_file = np.load('./data/stim_weights.npy')
      stimulus_temporal = equations.PulseTrain()
      stimulus_temporal.parameters["onset"] = config.stim_onset
      stimulus_temporal.parameters["T"] = config.stim_frequency

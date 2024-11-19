@@ -146,7 +146,7 @@ def run_optimization(config):
      file_sc_distances = './data/Schaefer2018_200Parcels_7Networks_distance.csv'
      file_empirical_timeseries = './data/TEPs.mat'
      file_leadfield_matrix = './data/leadfield'
-     file_stimulus = './data/stimulus_weights.npy'
+     file_stimulus = './data/stim_weights.npy'
 
      sc_weights_original = pd.read_csv(file_sc_weights, header=None, sep=' ').values
      sc_weights_norm = np.log1p(sc_weights_original)/np.linalg.norm(np.log1p(sc_weights_original))
