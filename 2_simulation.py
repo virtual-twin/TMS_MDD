@@ -63,7 +63,6 @@ def get_config():
     cmd_parameters.append(["speed", 2.5, float])
     cmd_parameters.append(["dtx", 0.25, float])
     cmd_parameters.append(["raw_p", 1.0, float])
-    cmd_parameters.append(["std_in_default", 250.0, float])
     cmd_parameters.append(["stim_pattern", "SinglePulse", str])
     cmd_parameters.append(["stim_onset", 1000.0, float])
     cmd_parameters.append(["stim_length", 10.0, float])

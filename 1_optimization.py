@@ -117,8 +117,8 @@ def get_config():
     cmd_parameters.append(["g_init", 0, float])
     cmd_parameters.append(["speed_default", 2.5, float])
     cmd_parameters.append(["speed_std", 0, float])
-    cmd_parameters.append(["std_in_default", 250, float])
-    cmd_parameters.append(["std_in_std", 0, float])
+    cmd_parameters.append(["noise_default", 250, float])
+    cmd_parameters.append(["noise_std", 0, float])
     cmd_parameters.append(["k_default", 7.5, float])
     cmd_parameters.append(["k_std", 0, float])
 
@@ -192,7 +192,7 @@ def run_optimization(config):
          # global
          g = [config.g_default, config.g_std, config.g_init],
          speed = [config.speed_default, config.speed_std],
-         std_in = [config.std_in_default, config.std_in_std],
+         noise = [config.noise_default, config.noise_std],
          
          # leadfield matrix
          lm = [leadfield_matrix, np.zeros((output_size, node_size))],
@@ -230,7 +230,7 @@ def run_optimization(config):
      
              'g': parameter.g[0],
              'speed': parameter.speed[0],
-             'std_in': parameter.std_in[0],
+             'noise': parameter.noise[0],
      
              'k': parameter.k[0],
 
