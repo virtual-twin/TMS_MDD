@@ -10,7 +10,7 @@
 # Dr. Timo Hofsähs, Marius Pille, Dr. Jil Meier, Prof. Petra Ritter
 # (in prep)
 # 
-# This code converts the fitting & simulation results and the required data to the 
+# This code converts the optimization & simulation results and the required data to the 
 # Brain Imaging Data Structure (BIDS) format.
 #
 # BIDS:
@@ -22,7 +22,8 @@
 # Schirner M., Ritter P., BIDS Extension Proposal 034 (BEP034): BIDS Computational 
 # Model Specification, Version 1.0, https://zenodo.org/records/7962032
 #
-# Copyright (c) 2024 Dr. Timo Hofsähs. All rights reserved.
+# The code to generate the .xml file for the equations was provided by Leon Martin,
+# Brain Simulation Section, Charité - Universitätsmedizin Berlin.
 #
 # License: This code is licensed under the Creative Commons Attribution 4.0 International 
 # License (CC-BY 4.0), which allows for redistribution, adaptation, and use in source 
@@ -44,7 +45,7 @@ import time
 import zipfile
 
 dir_data = "./data/"
-dir_results_fitting = "./results/results_fitting/"
+dir_results_optimization = "./results/results_optimization/"
 dir_results_simulation = "./results/results_simulation/"
 dir_bids = './bids/'
 dirs_bids = ['coord/', 'net/', 'param/', 'eeg/', 'eq/', 'spatial/']
@@ -59,7 +60,7 @@ dir_param = f"{dir_bids}param/"
 dir_eeg = f"{dir_bids}eeg/"
 dir_eq = f"{dir_bids}eq/"
 dir_spatial = f"{dir_bids}spatial/"
-bids_desc = "desc-tmseeg"
+bids_desc = "desc-tmsmdd"
 
 # simulation parameters
 subs = []
@@ -82,8 +83,8 @@ SourceCodeVersion = "1.5"
 SoftwareVersion = "1.5"
 SoftwareName = "TVB"
 SoftwareRepository = ["https://github.com/the-virtual-brain/tvb-framework/tree/1.5", "/tvb-framework-1.5"]
-BIDSDataFolder = dir_bids.copy()
-datasetIdentifier = "tms_mdd"
+BIDSDataFolder = dir_bids
+datasetIdentifier = bids_desc
 NumberOfRegions = 200
 data ={}
 data["SoftwareName"] = SoftwareName
@@ -94,7 +95,7 @@ data["SourceCodeVersion"] = SourceCodeVersion
 
 # create sub directories
 for sub in subs:
-    dir_sub = dir_target+"sub-"+sub
+    dir_sub = dir_bids+"sub-"+sub
     if not os.path.isdir(dir_sub):
         os.makedirs(dir_sub)
         os.makedirs(dir_sub+"/net")
@@ -111,15 +112,8 @@ dataset_description = {
     "Funding": ["PR acknowledges support by the Virtual Research Environment at the Charite Berlin – a node of EBRAINS Health Data Cloud, by EU Horizon Europe program Horizon EBRAINS2.0 (101147319), Virtual Brain Twin (101137289), EBRAINS-PREP 101079717, AISN – 101057655, EBRAIN-Health 101058516, Digital Europe TEF-Health 101100700, EU H2020 Virtual Brain Cloud 826421, Human Brain Project SGA2 785907; Human Brain Project SGA3 945539, German Research Foundation SFB 1436 (project ID 425899996); SFB 1315 (project ID 327654276); SFB 936 (project ID 178316478; SFB-TRR 295 (project ID 424778381); SPP Computational Connectomics RI 2073/6-1, RI 2073/10-2, RI 2073/9-1; DFG Clinical Research Group BECAUSE-Y 504745852, PHRASE Horizon EIC grant 101058240; Berlin Institute of Health and Foundation Charite."],
     "ReferencesAndLinks": ["https://www.thevirtualbrain.org"],
 }
-with open(f"{dir_target}dataset_description.json","w") as f:
+with open(f"{dir_bids}dataset_description.json","w") as f:
     json.dump(dataset_description, f, indent=4)
-
-
-# CODE
-# .json
-data["Description"] = "The results were produced with The Virtual Brain simulator."
-with open(BIDSDataFolder +"/code/desc-" + datasetIdentifier + "_code.json","w") as f:
-    json.dump(data, f, indent=4)
 
 
 # COORD
@@ -132,9 +126,7 @@ with open("./data/Schaefer2018_200Parcels_7Networks_order_info.txt", 'r') as fil
     region_labels_lines = file.readlines()
 region_labels = region_labels_lines[::2]
 region_labels = [line.strip() for line in region_labels]
-
 file_labels_tsv = f"{dir_coord}{bids_desc}_labels.tsv"
-
 with open(file_labels_tsv, 'w') as file:
     for label in region_labels:
         file.write(label + '\n')
@@ -166,7 +158,7 @@ with open(BIDSDataFolder + "/coord/desc-" + datasetIdentifier + "_times.json","w
 # _conv: leadfield matrix
 file_leadfield_matrix = dir_data+"leadfield"
 leadfield_matrix = np.load(file_leadfield_matrix, allow_pickle=True).T
-file_conv_tsv = f"{dir_coord}{bids_desc}conv.tsv"
+file_conv_tsv = f"{dir_coord}{bids_desc}_conv.tsv"
 np.savetxt(file_conv_tsv, leadfield_matrix, delimiter='\t', fmt='%s')
 # .json
 data_lfm ={}
@@ -218,12 +210,77 @@ with open(f"{dir_eeg}{bids_desc}_electrodes.json","w") as f:
 
 # EQ
 # .xml
-# TODO: INSERT
-
+eq_xml_content = '''
+<?xml version="1.0" ?>
+<Lems xmlns="http://www.neuroml.org/lems/0.7.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.neuroml.org/lems/0.7.6 https://raw.githubusercontent.com/LEMS/LEMS/development/Schemas/LEMS/LEMS_v0.7.6.xsd">
+  <Dimension name="voltage" m="1" l="2" t="-3" i="-1"/>
+  <Dimension name="time" t="1"/>
+  <Dimension name="current" i="1"/>
+  <Unit symbol="mV" dimension="voltage" power="-3" scale="1.0"/>
+  <Unit symbol="ms" dimension="time" power="-3" scale="1.0"/>
+  <Unit symbol="mA" dimension="current" power="-12" scale="1.0"/>
+  <ComponentType name="derivatives" description="Time derivates of the Neural Mass model">
+    <Constant name="A" symbol="A" value="3.25" dimension="lo=2.6, hi=9.75, step=0.05" description="Maximum amplitude of EPSP mV Also called average synaptic gain "/>
+    <Constant name="B" symbol="B" value="22" dimension="lo=17.6, hi=110.0, step=0.2" description="Maximum amplitude of IPSP mV Also called average synaptic gain "/>
+    <Constant name="J" symbol="J" value="135" dimension="lo=65.0, hi=1350.0, step=1.0" description="Average number of synapses between populations "/>
+    <Constant name="a_1" symbol="\\alpha_1\" value="1" dimension="lo=0.5, hi=1.5, step=0.1" description="Average probability constant of the number of synapses made by the pyramidal cells to the dendrites of the excitatory interneurons Jansen et al 1993 Jansen Rit 1995 It characterizes the connectivity between the PCs and EINs "/>
+    <Constant name="a_2" symbol="\\alpha_2\" value="0.8" dimension="lo=0.4, hi=1.2, step=0.1" description="Average probability constant of the number of synapses made by the EINs to the dendrites of the PCs Jansen et al 1993 Jansen Rit 1995 It characterizes the excitatory connectivity between the EINs and PCs "/>
+    <Constant name="a_3" symbol="\\alpha_3\" value="0.25" dimension="lo=0.125, hi=0.375, step=0.005" description="Average probability constant of the number of synapses made by the PCs to the dendrites of the IINs Jansen et al 1993 Jansen Rit 1995 It characterizes the connectivity between the PCs and inhibitory IINs "/>
+    <Constant name="a_4" symbol="\\alpha_4\" value="0.25" dimension="lo=0.125, hi=0.375, step=0.005" description="Average probability constant of the number of synapses made by the IINs to the dendrites of the PCs Jansen et al 1993 Jansen Rit 1995 It characterizes the connectivity between the IINs and PCs "/>
+    <Constant name="a" symbol="a" value="0.1" dimension="lo=0.05, hi=0.15, step=0.01" description="Rate constant of the excitatory post synaptic potential EPSP or average synaptic gain Jansen et al 1993 Jansen Rit 1995 van Rotterdam et al 1982 It is interpreted as being the lumped representation of the sum of the reciprocal of the time constant of passive membrane and all other spatially distributed delays including temporal dispersion in the afferent tract synaptic diffusion and resistive capacitive delay in the dendritic network Freeman 1975 Jansen et al 1993 Note In TVB the parameter is converted in ms 1 "/>
+    <Constant name="b" symbol="b" value="0.05" dimension="lo=0.025, hi=0.075, step=0.005" description="Rate constant of the inhibitory post synaptic potential IPSP or average synaptic gain Jansen et al 1993 Jansen Rit 1995 van Rotterdam et al 1982 It is interpreted as being the lumped representation of the sum of the reciprocal of the time constant of passive membrane and all other spatially distributed delays including temporal dispersion in the afferent tract synaptic diffusion and resistive capacitive delay in the dendritic network Freeman 1975 Note In TVB the parameter is converted in ms 1 "/>
+    <Constant name="mu" symbol="\\mu" value="0.22" dimension="lo=0.0, hi=0.22, step=0.01" description="Mean excitatory external input to the derivative of the state variable y4 JR PCs represented by a pulse density that consists of activity originating from adjacent and more distant cortical columns as well as from subcortical structures e g thalamus "/>
+    <Constant name="nu_max" symbol="\\nu_{max}" value="0.0025" dimension="lo=0.00125, hi=0.00375, step=0.00001" description="Asymptotic of the sigmoid function Sigm JR corresponds to the maximum firing rate of the neural populations "/>
+    <Constant name="r" symbol="r" value="0.56" dimension="lo=0.28, hi=0.84, step=0.01" description="Steepness or gain parameter of the sigmoid function Sigm JR Jansen et al 1993 Jansen Rit 1995 "/>
+    <Constant name="v0" symbol="v_0" value="5.52" dimension="lo=3.12, hi=6.0, step=0.02" description="Average firing threshold PSP for which half of the firing rate is achieved Note The usual value for this parameter is 6 0 Jansen et al 1993 Jansen Rit 1995 "/>
+    <Exposure name="y0" dimension="None" description="First state variable of the first Jansen Rit population PCs Jansen et al 1993 Jansen Rit 1995 It represents the averaged excitatory post synaptic membrane potentials from the PCs "/>
+    <Exposure name="y1" dimension="None" description="First state variable of the second Jansen Rit population EINs Jansen et al 1993 Jansen Rit 1995 It represents the averaged excitatory post synaptic membrane potentials from the EINs "/>
+    <Exposure name="y1 - y2" dimension="None"/>
+    <Exposure name="y2" dimension="None" description="First state variable of the third Jansen Rit population IINs Jansen et al 1993 Jansen Rit 1995 It represents the averaged inhibitory post synaptic membrane potentials from the IINs "/>
+    <Exposure name="y3" dimension="None" description="Second state variable of the first Jansen Rit population excitatory PCs Jansen et al 1993 Jansen Rit 1995 "/>
+    <Dynamics>
+      <StateVariable name="y0" dimension="-1.0, 1.0"/>
+      <StateVariable name="y1" dimension="-500.0, 500.0"/>
+      <StateVariable name="y2" dimension="-50.0, 50.0"/>
+      <StateVariable name="y3" dimension="-6.0, 6.0"/>
+      <StateVariable name="y4" dimension="-20.0, 20.0"/>
+      <StateVariable name="y5" dimension="-500.0, 500.0"/>
+      <DerivedVariable name="sigm_y1_y2" exposure="sigm_y1_y2" value="2.0*nu_max/(exp(r*(v0 - (y1 - y2))) + 1.0)"/>
+      <DerivedVariable name="sigm_y0_3" exposure="sigm_y0_3" value="2.0*nu_max/(exp(r*(-J*a_3*y0 + v0)) + 1.0)"/>
+      <DerivedVariable name="sigm_y0_1" exposure="sigm_y0_1" value="2.0*nu_max/(exp(r*(-J*a_1*y0 + v0)) + 1.0)"/>
+      <DerivedVariable name="short_range_coupling" exposure="short_range_coupling" value="local_coupling*(y1 - y2)"/>
+      <TimeDerivative variable="y0dot" value="y3"/>
+      <TimeDerivative variable="y1dot" value="y4"/>
+      <TimeDerivative variable="y2dot" value="y5"/>
+      <TimeDerivative variable="y3dot" value="A*a*sigm_y1_y2 - a^2*y0 - 2.0*a*y3"/>
+      <TimeDerivative variable="y4dot" value="A*a*(J*a_2*sigm_y0_1 + c_pop0 + mu + short_range_coupling) - a^2*y1 - 2.0*a*y4"/>
+      <TimeDerivative variable="y5dot" value="B*J*a_4*b*sigm_y0_3 - b^2*y2 - 2.0*b*y5"/>
+    </Dynamics>
+  </ComponentType>
+  <ComponentType name="coupling_function" description="Sigmoidal Coupling Function">
+    <Parameter name="g_ij" dimension="0" description="connectivity weights matrix"/>
+    <Parameter name="x_i" dimension="0" description="current state"/>
+    <Parameter name="x_j" dimension="0" description="delayed state"/>
+    <DerivedParameter name="c_pop0" description="" value="global_coupling"/>
+    <Constant name="cmin" value="-1.0" dimension="lo=-1000.0, hi=1000.0, step=10.0" description="Minimum of the Sigmoid function"/>
+    <Constant name="cmax" value="1.0" dimension="lo=-1000.0, hi=1000.0, step=10.0" description="Maximum of the Sigmoid function"/>
+    <Constant name="midpoint" value="0.0" dimension="lo=-1000.0, hi=1000.0, step=10.0" description="Midpoint of the linear portion of the sigmoid"/>
+    <Constant name="a" value="1.0" dimension="lo=0.01, hi=1000.0, step=10.0" description="Scaling of sigmoidal"/>
+    <Constant name="sigma" value="230.0" dimension="lo=0.01, hi=1000.0, step=10.0" description="Standard deviation of sigmoidal"/>
+    <Dynamics>
+      <DerivedVariable name="sum" value="(g_ij * x_j).sum(axis=2)"/>
+      <DerivedVariable name="post" value="cmin + ((cmax - cmin) / (1.0 + exp(-a *((sum - midpoint) / sigma))))"/>
+    </Dynamics>
+  </ComponentType>
+</Lems>
+'''
+with open(f"{dir_eq}{bids_desc}_eq.xml", "w") as f:
+    f.write(eq_xml_content)
 # .json
 data["Description"] = "These are the equations to simulate the time series with the Jansen & Rit neural mass model."
 with open(BIDSDataFolder + "/eq/desc-" + datasetIdentifier + "_eq.json","w") as f:
     json.dump(data, f, indent=4)
+
 
 
 # NET
@@ -232,7 +289,7 @@ file_tract_lengths = dir_data+"Schaefer2018_200Parcels_7Networks_distance.csv"
 tract_lengths = pd.read_csv(file_tract_lengths, header=None, sep=' ').values
 file_distances_tsv = f"{dir_net}{bids_desc}_distances.tsv"
 np.savetxt(file_distances_tsv, tract_lengths, delimiter='\t', fmt='%s')
-.json
+# .json
 data_sc ={}
 data_sc["NumberOfRows"] = NumberOfRegions
 data_sc["NumberOfColumns"] = NumberOfRegions
@@ -253,11 +310,7 @@ with open(f"{dir_net}{bids_desc}_weights.json","w") as f:
 
 
 # PARAM
-import argparse
 import math
-import numpy as np
-import pandas as pd
-import pickle
 from numba import guvectorize, float64
 from tvb.simulator.lab import *
 from tvb.basic.neotraits.api import NArray, List, Range
@@ -389,7 +442,7 @@ with open(file_stim_node_tsv, 'w') as file:
 data_stimnode ={}
 data_stimnode["NumberOfRows"] = NumberOfRegions
 data_stimnode["NumberOfColumns"] = 1
-data_stimnode["RegionLabels"] = f"{dir_target}coord/{bids_desc}_labels.tsv"
+data_stimnode["RegionLabels"] = f"{dir_coord}{bids_desc}_labels.tsv"
 data_stimnode["Description"] = "This array contains the TMS stimulus strength per region, derived from the SimNIBS software. It was originally published here: Momi D, Wang Z, Griffiths D (2023) TMS-evoked responses are driven by recurrent large-scale network dynamics eLife 12:e83232, DOI: https://doi.org/10.7554/eLife.83232, Download: https://github.com/GriffithsLab/PyTepFit"
 with open(f"{dir_spatial}{bids_desc}_stim-node.json","w") as f:
     json.dump(data_stimnode, f, indent=4)
@@ -398,11 +451,11 @@ with open(f"{dir_spatial}{bids_desc}_stim-node.json","w") as f:
 # SUB-XX
 # net/_weights: store subject-individual SC
 for isub, sub in enumerate(subs):
-    dir_target_sub = f"{dir_target}sub-{sub}/"
+    dir_target_sub = f"{dir_bids}sub-{sub}/"
     for run in runs:
-        dict_fitted_file = f"sub_{str(isub)}_run_{run}"
-        with zipfile.ZipFile(f'{dir_results_fitting}{dict_fitted_file}.zip', 'r') as zipf:
-            with zipf.open(f"{dict_fitted_file}.pkl") as f:
+        dict_optimized_file = f"sub_{str(isub)}_run_{run}"
+        with zipfile.ZipFile(f'{dir_results_optimization}{dict_optimized_file}.zip', 'r') as zipf:
+            with zipf.open(f"{dict_optimized_file}.pkl") as f:
                 dict_run = pickle.load(f)
                 sub_sc = dict_run["fitted_sc"]
         filename_tsv = f"sub-{sub}_{bids_desc}_run-{str(run)}_weights.tsv"
@@ -417,7 +470,7 @@ for isub, sub in enumerate(subs):
         data_sc["NumberOfColumns"] = NumberOfRegions
         data_sc["CoordsRows"] = ["../../coord/desc-" + datasetIdentifier + "_labels.json", "../../coord/desc-" + datasetIdentifier + "_nodes.json"]
         data_sc["CoordsColumns"] = ["../../coord/desc-" + datasetIdentifier + "_labels.json", "../../coord/desc-" + datasetIdentifier + "_nodes.json"]
-        data_sc["Description"] = f"These are the structural connectivity weights of subject {sub} after fitting repetition number {run}."
+        data_sc["Description"] = f"These are the structural connectivity weights of subject {sub} after optimization repetition number {run}."
         with open(f"{dir_target_sub}net/sub-{sub}_{bids_desc}_run-{str(run)}_weights.json","w") as f:
             json.dump(data_sc, f, indent=4)
 
@@ -430,7 +483,7 @@ data_ts["ModelEq"] = f"../../eq/{bids_desc}_eq.xml"
 data_ts["SamplingPeriod"] = 400/1000
 data_ts["SamplingFrequency"] = int(1000 / dtx)
 for isub, sub in enumerate(subs):
-    dir_target_sub = f"{dir_target}sub-{sub}/"
+    dir_target_sub = f"{dir_bids}sub-{sub}/"
     for run in runs:
         # raw
         with zipfile.ZipFile(f"{dir_results_simulation}raw/sub_{isub}_run_{run}_raw.zip", 'r') as zipf:
