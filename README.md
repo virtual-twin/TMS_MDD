@@ -89,7 +89,7 @@ For questions or comments, please contact:
 
 ## 7. Acknowledgements
 
-The optimization method and all functions in the `functions.py` except 'gmfa' and  'gmfa_timepoint' are based on the code provided with the following publication:
+The optimization method and all functions in `functions.py` except 'gmfa' and  'gmfa_timepoint' are based on the code provided with the following publication:
 Momi D, Wang Z, Griffiths JD. 2023. TMS-EEG evoked responses are driven by recurrent large-scale network dynamics, eLife2023;12:e83232, DOI: https://doi.org/10.7554/eLife.83232. 
 Licensed under a Creative Commons Attributionlicense (CC-BY). The original code can be found at: https://github.com/GriffithsLab/PyTepFit/blob/main/tepfit/fit.py
 
