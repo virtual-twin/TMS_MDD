@@ -1,18 +1,18 @@
 # ------------------------------------------------------------------------------
-# 1_fitting.py
+# 1_optimization.py
 # Author: Dr. Timo Hofsähs
 #
 # Description: 
 # This Python script is part of the code accompanying the scientific publication:
 # The Virtual Brain links transcranial magnetic stimulation evoked potentials and 
-# neurotransmitter changes in major depressive disorder
+# inhibitory neurotransmitter changes in major depressive disorder
 # Dr. Timo Hofsähs, Marius Pille, Dr. Jil Meier, Prof. Petra Ritter
 # (in prep)
 # 
-# This code performs fitting of simulated TMS-evoked potentials to empirical data.
-# Fitting results are stored. 
+# This code performs optimization of simulated TMS-evoked potentials to empirical data.
+# optimization results are stored. 
 #
-# The fitting method is based on the publication:
+# The optimization method is based on the publication:
 # Momi D, Wang Z, Griffiths JD. 2023. TMS-EEG evoked responses are driven by recurrent 
 # large-scale network dynamics. eLife2023;12:e83232 DOI: https://doi.org/10.7554/eLife.83232
 # Licensed under a Creative Commons Attribution license (CC-BY)
@@ -128,8 +128,8 @@ def get_config():
     return config
 
 
-def run_fitting(config):
-     '''Set up and run fitting'''
+def run_optimization(config):
+     '''Set up and run optimization'''
      
      start_time = time.time()
      print(f"\nConfig: {config}\n")
@@ -155,7 +155,7 @@ def run_fitting(config):
      leadfield_matrix = np.load(file_leadfield_matrix, allow_pickle=True)
      stimulus_spatial = np.load(file_stimulus)
 
-     dir_save = './results/results_fitting/'
+     dir_save = './results/results_optimization/'
      if not os.path.exists(dir_save):
          os.makedirs(dir_save)
 
@@ -258,4 +258,4 @@ def run_fitting(config):
 
 if (__name__ == "__main__"):
      config = get_config()
-     run_fitting(config)
+     run_optimization(config)

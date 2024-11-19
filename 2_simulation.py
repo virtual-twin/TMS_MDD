@@ -5,12 +5,12 @@
 # Description: 
 # This Python script is part of the code accompanying the scientific publication:
 # The Virtual Brain links transcranial magnetic stimulation evoked potentials and 
-# neurotransmitter changes in major depressive disorder
+# inhibitory neurotransmitter changes in major depressive disorder
 # Dr. Timo Hofsähs, Marius Pille, Dr. Jil Meier, Prof. Petra Ritter
 # (in prep)
 # 
 # This code performs simulations of TMS-evoked responses in EEG using 'The Virtual 
-# Brain' (TVB) simulator. The script loads fitted parameters created with 'fitting.py'
+# Brain' (TVB) simulator. The script loads optimized SCs created with '1_optimization.py'
 # repeats the simulation with one of two parameters modified and stores the results.
 #
 # Copyright (c) 2024 Dr. Timo Hofsähs. All rights reserved.
@@ -83,18 +83,18 @@ def run_simulation(config):
      sub = config.sub
      print(f"Sub: {sub}")
 
-     # DEFINE FITTING RUN
+     # DEFINE OPTIMIZATION RUN
      run = config.run
      print(f"Run: {run}")
 
      # DEFINE SEED
      np.random.seed(config.seed)
 
-     # LOAD FITTED PARAMETERS
-     with zipfile.ZipFile(f"./results/results_fitting/{config.filename}.zip", 'r') as zipf:
+     # LOAD OPTIMIZED PARAMETERS
+     with zipfile.ZipFile(f"./results/results_optimization/{config.filename}.zip", 'r') as zipf:
          with zipf.open(f"{config.filename}.pkl") as f:
              dict_sub = pickle.load(f)
-     print(f"Load fitted parameters\n")
+     print(f"Load optimized SCs\n")
 
      # LOAD FACTORS
      factors_explore = ['jr_b', 'jr_c4']
