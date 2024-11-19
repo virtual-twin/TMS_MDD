@@ -28,7 +28,7 @@ This repository contains the code and data necessary to reproduce the results pr
   - `leadfield/`: Leadfield matrix to project from source-level to sensor-level (EEG)
   - `Schaefer2018_200Parcels_7Networks_count.csv`: Empirical structural connectivity weights matrix before optimization
   - `Schaefer2018_200Parcels_7Networks_distance.csv`: Structural connectivity tract length matrix
-  - `stimulus_weights.npy`: Spatial information of TMS stimulus
+  - `stim_weights.npy`: Spatial information of TMS stimulus
   - `TEPs.mat`: Empirical TMS-EEG timeseries for 20 healthy subjects, needs to be downloaded separately and placed manually in data
 - `create_parameters.py`: Creates `parameters.txt`
 - `environment.yml`: Generates environment with necessary software
@@ -49,7 +49,7 @@ Files: `TEPs.mat`
 **Structural Connectivity & further Simulation Data**<br>
 Momi D, Wang Z, Griffiths D (2023) TMS-evoked responses are driven by recurrent large-scale network dynamics eLife 12:e83232, DOI: https://doi.org/10.7554/eLife.83232,<br>
 Download: https://github.com/GriffithsLab/PyTepFit<br>
-Files: `Schaefer2018_200Parcels_7Networks_count.csv`, `Schaefer2018_200Parcels_7Networks_distance.csv`, `leadfield`, `stimulus_weights.npy`
+Files: `Schaefer2018_200Parcels_7Networks_count.csv`, `Schaefer2018_200Parcels_7Networks_distance.csv`, `leadfield`, `stim_weights.npy`
 
 
 ## 3. Prerequisites
@@ -87,10 +87,10 @@ For questions or comments, please contact:
 - Petra Ritter: petra.ritter@bih-charite.de
 
 
-## 7. Acknowledgments
+## 7. Acknowledgements
 
-The optimization method and all functions in this script `functions.py` except from 'gmfa' and  'gmfa_timepoint' are based on the code provided with the following publication:
-Momi D, Wang Z, Griffiths JD. 2023. TMS-EEG evoked responses are driven by recurrent large-scale network dynamics. eLife2023;12:e83232 DOI: https://doi.org/10.7554/eLife.83232 
+The optimization method and all functions in the `functions.py` except 'gmfa' and  'gmfa_timepoint' are based on the code provided with the following publication:
+Momi D, Wang Z, Griffiths JD. 2023. TMS-EEG evoked responses are driven by recurrent large-scale network dynamics, eLife2023;12:e83232, DOI: https://doi.org/10.7554/eLife.83232. 
 Licensed under a Creative Commons Attributionlicense (CC-BY). The original code can be found at: https://github.com/GriffithsLab/PyTepFit/blob/main/tepfit/fit.py
 
 Brain Imaging Data Structure (BIDS)
