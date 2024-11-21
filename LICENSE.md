@@ -1,5 +1,5 @@
-                      EUROPEAN UNION PUBLIC LICENCE v. 1.2
-                      EUPL © the European Union 2007, 2016
+EUROPEAN UNION PUBLIC LICENCE v. 1.2
+EUPL © the European Union 2007, 2016
 
 This European Union Public Licence (the ‘EUPL’) applies to the Work (as defined
 below) which is provided under the terms of this Licence. Any use of the Work,
@@ -10,7 +10,7 @@ The Work is provided under the terms of this Licence when the Licensor (as
 defined below) has placed the following notice immediately following the
 copyright notice for the Work:
 
-        Licensed under the EUPL
+Licensed under the EUPL
 
 or has expressed by any other means his willingness to license under the EUPL.
 

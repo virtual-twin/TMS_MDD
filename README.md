@@ -104,3 +104,6 @@ Gorgolewski, K., Auer, T., Calhoun, V. et al. The brain imaging data structure, 
 
 BIDS Extension for Computational Models:
 Schirner M., Ritter P., BIDS Extension Proposal 034 (BEP034): BIDS Computational Model Specification, Version 1.0, https://zenodo.org/records/7962032
+
+The code for `4_bids_conversion.py` is based on code provided by Dr. Jil Meier. 
+The code to generate the equations .xml file in `4_bids_conversion.py`was provided by Leon Martin, Brain Simulation Section, Charité, Berlin.
