@@ -2,6 +2,11 @@
 # 3_analysis.py
 # Author: Dr. Timo Hofsähs
 #
+# Copyright © 2024 Charité Universitätsmedizin Berlin. 
+# This software is licensed under the terms of the European Union Public License 
+# (EUPL) version 1.2 or later.
+# https://joinup.ec.europa.eu/collection/eupl/eupl-text-11-12
+# 
 # Description: 
 # This Python script is part of the code accompanying the scientific publication:
 # The Virtual Brain links transcranial magnetic stimulation evoked potentials and 
@@ -11,14 +16,6 @@
 # 
 # This code is used to analyze the results generated with '2_simulation.py'. 
 # It reads data and results, performs the statistical analysis and plots the results.
-#
-# Copyright (c) 2024 Dr. Timo Hofsähs. All rights reserved.
-#
-# License: This code is licensed under the Creative Commons Attribution 4.0 International 
-# License (CC-BY 4.0), which allows for redistribution, adaptation, and use in source 
-# and binary forms, with or without modification, provided proper credit is given to 
-# the original authors (cite as indicated above). You can view the full terms of this 
-# license at: https://creativecommons.org/licenses/by/4.0/
 # ------------------------------------------------------------------------------
 
 import matplotlib.cm as cm

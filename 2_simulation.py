@@ -2,6 +2,11 @@
 # 2_simulation.py
 # Author: Dr. Timo Hofsähs
 #
+# Copyright © 2024 Charité Universitätsmedizin Berlin. 
+# This software is licensed under the terms of the European Union Public License 
+# (EUPL) version 1.2 or later.
+# https://joinup.ec.europa.eu/collection/eupl/eupl-text-11-12
+# 
 # Description: 
 # This Python script is part of the code accompanying the scientific publication:
 # The Virtual Brain links transcranial magnetic stimulation evoked potentials and 
@@ -12,14 +17,6 @@
 # This code performs simulations of TMS-evoked responses in EEG using 'The Virtual 
 # Brain' (TVB) simulator. The script loads optimized SCs created with '1_optimization.py'
 # repeats the simulation with one of two parameters modified and stores the results.
-#
-# Copyright (c) 2024 Dr. Timo Hofsähs. All rights reserved.
-#
-# License: This code is licensed under the Creative Commons Attribution 4.0 International 
-# License (CC-BY 4.0), which allows for redistribution, adaptation, and use in source 
-# and binary forms, with or without modification, provided proper credit is given to 
-# the original authors (cite as indicated above). You can view the full terms of this 
-# license at: https://creativecommons.org/licenses/by/4.0/
 # ------------------------------------------------------------------------------
 
 import argparse

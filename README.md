@@ -76,7 +76,11 @@ To create the results, the scripts were executed on a high-performance computing
 
 ## 5. License
 
-This project is licensed under the Creative Commons Attribution 4.0 International License (CC-BY 4.0, https://creativecommons.org/licenses/by/4.0/). You are free to share, copy, distribute, and transmit the work, as well as to adapt the work, provided that appropriate credit is given to the authors, a link to the license is provided, and you indicate if changes were made.
+This project is licensed under the **European Union Public License (EUPL), version 1.2**.  
+You may use, modify, and distribute this software under the terms of the EUPL v1.2.  
+
+For more information, see the [EUPL v1.2 license text](https://joinup.ec.europa.eu/collection/eupl/eupl-text-11-12) or the accompanying `LICENSE` file in this repository.
+
 
 
 ## 6. Contact Information
@@ -91,7 +95,9 @@ For questions or comments, please contact:
 
 The optimization method and all functions in `functions.py` except 'gmfa' and  'gmfa_timepoint' are based on the code provided with the following publication:
 Momi D, Wang Z, Griffiths JD. 2023. TMS-EEG evoked responses are driven by recurrent large-scale network dynamics, eLife2023;12:e83232, DOI: https://doi.org/10.7554/eLife.83232. 
-Licensed under a Creative Commons Attributionlicense (CC-BY). The original code can be found at: https://github.com/GriffithsLab/PyTepFit/blob/main/tepfit/fit.py
+Licensed under a Creative Commons Attributionlicense (CC-BY).
+Code: https://github.com/GriffithsLab/PyTepFit/blob/main/tepfit/fit.py
+Licensed under MIT License: 'Copyright (c) [2023] [Davide Momi]. Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.'
 
 Brain Imaging Data Structure (BIDS)
 Gorgolewski, K., Auer, T., Calhoun, V. et al. The brain imaging data structure, a format for organizing and describing outputs of neuroimaging experiments. Sci Data 3, 160044 (2016). https://doi.org/10.1038/sdata.2016.44

@@ -2,6 +2,11 @@
 # 1_optimization.py
 # Author: Dr. Timo Hofsähs
 #
+# Copyright © 2024 Charité Universitätsmedizin Berlin. 
+# This software is licensed under the terms of the European Union Public License 
+# (EUPL) version 1.2 or later.
+# https://joinup.ec.europa.eu/collection/eupl/eupl-text-11-12
+#
 # Description: 
 # This Python script is part of the code accompanying the scientific publication:
 # The Virtual Brain links transcranial magnetic stimulation evoked potentials and 
@@ -16,16 +21,17 @@
 # Momi D, Wang Z, Griffiths JD. 2023. TMS-EEG evoked responses are driven by recurrent 
 # large-scale network dynamics. eLife2023;12:e83232 DOI: https://doi.org/10.7554/eLife.83232
 # Licensed under a Creative Commons Attribution license (CC-BY)
-# The original code can be found at:
-# https://github.com/GriffithsLab/PyTepFit/tree/main
-#
-# Copyright (c) 2024 Dr. Timo Hofsähs. All rights reserved.
-#
-# License: This code is licensed under the Creative Commons Attribution 4.0 International 
-# License (CC-BY 4.0), which allows for redistribution, adaptation, and use in source 
-# and binary forms, with or without modification, provided proper credit is given to 
-# the original authors (cite as indicated above). You can view the full terms of this 
-# license at: https://creativecommons.org/licenses/by/4.0/
+# Code: https://github.com/GriffithsLab/PyTepFit/tree/main
+# Licensed under MIT License:
+# 'Copyright (c) [2023] [Davide Momi]
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.'
 # ------------------------------------------------------------------------------
 
 import argparse

@@ -3,6 +3,11 @@
 # Author: Dr. Timo Hofsähs
 # Based on code provided by Dr. Jil Meier
 #
+# Copyright © 2024 Charité Universitätsmedizin Berlin. 
+# This software is licensed under the terms of the European Union Public License 
+# (EUPL) version 1.2 or later.
+# https://joinup.ec.europa.eu/collection/eupl/eupl-text-11-12
+# 
 # Description: 
 # This Python script is part of the code accompanying the scientific publication:
 # The Virtual Brain links transcranial magnetic stimulation evoked potentials and 
@@ -24,12 +29,6 @@
 #
 # The code to generate the .xml file for the equations was provided by Leon Martin,
 # Brain Simulation Section, Charité - Universitätsmedizin Berlin.
-#
-# License: This code is licensed under the Creative Commons Attribution 4.0 International 
-# License (CC-BY 4.0), which allows for redistribution, adaptation, and use in source 
-# and binary forms, with or without modification, provided proper credit is given to 
-# the original authors (cite as indicated above). You can view the full terms of this 
-# license at: https://creativecommons.org/licenses/by/4.0/
 # ------------------------------------------------------------------------------
 
 import gdown
