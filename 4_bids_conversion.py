@@ -12,7 +12,7 @@
 # This Python script is part of the code accompanying the scientific publication:
 # The Virtual Brain links transcranial magnetic stimulation evoked potentials and 
 # inhibitory neurotransmitter changes in major depressive disorder
-# Dr. Timo Hofsähs, Marius Pille, Dr. Jil Meier, Prof. Petra Ritter
+# Timo Hofsähs, Marius Pille, Lukas Kern, Anuja Negi, Jil Meier, Petra Ritter
 # (in prep)
 # 
 # This code converts the optimization & simulation results and the required data to the 

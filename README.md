@@ -1,11 +1,11 @@
 # Transcranial Magnetic Stimulation of Major Depressive Disorder in 'The Virtual Brain'
 #### Author: Dr. Timo Hofsähs
 
-This repository contains the code and data necessary to reproduce the results presented in the paper:
+This repository contains the code and data necessary to reproduce the results presented in the publication:
 
 
 ### The Virtual Brain links transcranial magnetic stimulation evoked potentials and inhibitory neurotransmitter changes in major depressive disorder
-#### Timo Hofsähs, Marius Pille, Jil Meier, Petra Ritter  
+#### Timo Hofsähs, Marius Pille, Lukas Kern, Anuja Negi, Jil Meier, Petra Ritter  
 (in prep)
 
 ## Table of Contents
@@ -20,7 +20,7 @@ This repository contains the code and data necessary to reproduce the results pr
 
 ## 1. Project Structure
 
-- `1_optimization.py`: Script 1 for optimizing the SC per subject
+- `1_optimization.py`: Script 1 for optimizing the structural connectivity (SC) per subject
 - `2_simulation.py`: Script 2 for running simulations utilizing optimized SCs
 - `3_analysis.py`: Script 3 for analyzing simulation results and generating plots
 - `4_bids_conversion.py`: Script 4 for converting the generated results into BIDS standard
