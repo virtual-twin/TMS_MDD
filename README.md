@@ -94,11 +94,9 @@ For questions or comments, please contact:
 ## 7. Acknowledgements
 
 The optimization method and all functions in `functions.py` except 'gmfa' and  'gmfa_timepoint' are based on the code provided with the following publication:
-Momi D, Wang Z, Griffiths JD. 2023. TMS-EEG evoked responses are driven by recurrent large-scale network dynamics, eLife2023;12:e83232, DOI: https://doi.org/10.7554/eLife.83232. 
+Momi D, Wang Z, Griffiths JD. 2023. TMS-EEG evoked responses are driven by recurrent large-scale network dynamics, eLife2023;12:e83232, DOI: https://doi.org/10.7554/eLife.83232.
 Licensed under a Creative Commons Attributionlicense (CC-BY).
-
-Code: https://github.com/GriffithsLab/PyTepFit/blob/main/tepfit/fit.py 
-
+Code: https://github.com/GriffithsLab/PyTepFit/blob/main/tepfit/fit.py
 Licensed under MIT License: 'Copyright (c) [2023] [Davide Momi]. Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.'
 
 Brain Imaging Data Structure (BIDS)
