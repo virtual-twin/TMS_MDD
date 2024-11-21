@@ -244,14 +244,14 @@ for i in range(3):
 axs[4].plot(np.arange(-50,300), gmfa_high, color=cmap_custom_blue(0.5), label='Low b', lw=4)
 axs[4].plot(np.arange(-50,300), gmfa_def, color=cmap_custom_purple(0.5), label='Default b', lw=4)
 axs[4].plot(np.arange(-50,300), gmfa_low, color=cmap_custom_magenta(0.5), label='High b', lw=4)
+axs[4].legend(loc='upper right')
 
 for i, ax in enumerate(axs):
     if i != 3:
-        ax.set_ylabel('Amplitude (µV)' if i < 3 else 'GMFA')
+        ax.set_ylabel('Amplitude (µV)' if i < 3 else 'GMFA (µV)')
         ax.set_xlabel('Time (ms)')
         ax.set_xlim(-50, 300)
-        ax.axvline(x=0, color='black', linestyle='--', label='Stimulus')
-        ax.legend(loc='upper right')
+        ax.axvline(x=0, color='black', linestyle='--')
 axs[3].axis('off')
 plt.tight_layout()
 plt.savefig(f"{dir_exp}methodplot_TEP_GMFA_sim.png", transparent=True)
@@ -323,13 +323,13 @@ ax[2].axis('off')
 ax[3].plot(sim_res_gmfa[sub_b_choice,0,0,idx_b_low,:][::4], label=f"b={int(factors_values_b_c4[0, idx_b_low])}s$^-$$^1$", color=cmap_custom_binary2([0.1]), lw=4)
 ax[3].plot(sim_res_gmfa[sub_b_choice,0,0,idx_b_high,:][::4], label=f"b={int(factors_values_b_c4[0, idx_b_high])}s$^-$$^1$", color=cmap_custom_binary2([0.9]), lw=4)
 ax[3].legend(loc="upper right", fontsize=11)
-ax[3].set_ylabel('GMFA')
+ax[3].set_ylabel('GMFA (µV)')
 ax[3].set_title(f"GMFA Comparison")
 ax[3].set_xlim(0,300)
 for i in [0, 1]:
     ax[i].axvline(x=0, color='black', linestyle='--')
     ax[i].set_xlim(-50,300)
-    ax[i].set_ylabel('Amplitude (mV)')
+    ax[i].set_ylabel('Amplitude (µV)')
 for i in [0, 1, 3]:
     ax[i].set_xlabel("Time (ms)")
 fig.tight_layout()
@@ -353,7 +353,7 @@ ax[0].plot(sim_res_gmfa[sub_c4_choice,0,1,idx_c4_low,:][::4], label=f"C$_4$={np.
 ax[0].plot(sim_res_gmfa[sub_c4_choice,0,1,idx_c4_high,:][::4], label=f"C$_4$={np.round(factors_values_b_c4[1, idx_c4_high],3)}", color=cmap_custom_binary2([0.9]), lw=4)
 ax[0].legend(loc="upper right", fontsize=11)
 ax[0].set_xlim(0,300)
-ax[0].set_ylabel('GMFA')
+ax[0].set_ylabel('GMFA (µV)')
 ax[0].set_title(f"GMFA Comparison")
 ax[1].axis('off')
 for j, col in enumerate(cmap_custom_blue.reversed()(np.linspace(0, 1, 62))):
@@ -366,7 +366,7 @@ ax[3].sharey(ax[2])
 for i in [2, 3]:
     ax[i].axvline(x=0, color='black', linestyle='--')
     ax[i].set_xlim(-50,300)
-    ax[i].set_ylabel('Amplitude (mV)')
+    ax[i].set_ylabel('Amplitude (µV)')
 for i in [0, 2, 3]:
     axs = ax[i]
     axs.set_xlabel("Time (ms)")
