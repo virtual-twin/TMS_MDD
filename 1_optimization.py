@@ -12,7 +12,9 @@
 # The Virtual Brain links transcranial magnetic stimulation evoked potentials and 
 # inhibitory neurotransmitter changes in major depressive disorder
 # Timo Hofsähs, Marius Pille, Lukas Kern, Anuja Negi, Jil Meier, Petra Ritter
-# (in prep)
+# (submitted)
+# Preprint: https://www.biorxiv.org/content/10.1101/2024.11.25.622620v1
+# DOI: 10.1101/2024.11.25.622620
 # 
 # This code performs optimization of simulated TMS-evoked potentials to empirical data.
 # optimization results are stored. 
