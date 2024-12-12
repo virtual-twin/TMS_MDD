@@ -159,7 +159,7 @@ def run_optimization(config):
      sc_weights_original = pd.read_csv(file_sc_weights, header=None, sep=' ').values
      sc_weights_norm = np.log1p(sc_weights_original)/np.linalg.norm(np.log1p(sc_weights_original))
      sc_distances = pd.read_csv(file_sc_distances, header=None, sep=' ').values
-     empirical_timeseries = scipy.io.loadmat(file_empirical_timeseries)['meanTrials'][0][2][0]
+     empirical_timeseries = scipy.io.loadmat(file_empirical_timeseries)['meanTrials'][0][2][sub]
      leadfield_matrix = np.load(file_leadfield_matrix, allow_pickle=True)
      stimulus_spatial = np.load(file_stimulus)
 
