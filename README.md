@@ -87,7 +87,7 @@ For more information, see the [EUPL v1.2 license text](https://joinup.ec.europa.
 ## 6. Contact Information
 
 For questions or comments, please contact:
-- Timo Hofsähs: timo.hofsaehs@charite.de
+- Timo Hofsähs: timo.hofsaehs@mhb-fontane.de
 - Jil Meier: jil-mona.meier@bih-charite.de
 - Petra Ritter: petra.ritter@bih-charite.de
 
